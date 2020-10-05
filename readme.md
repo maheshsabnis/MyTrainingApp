@@ -75,12 +75,29 @@ ASP.NET Core Programming
 		- Microsoft.EntityFrameworkCore.SqlServer
 		- Microsoft.EntityFrameworkCore.Design
 		- Microsoft.EntityFrameworkCore.Tools
+
+- TO install 'dotnet ef' command in global scope run the followi gcommand
+
+dotnet tool install --global dotnet-ef
+
 	
 	- Database First Approach
 		- Database is ready with tables and Model classes are generated using following command from the
 		Command Prompt
 		- dotnet ef dbcontext scaffold "<Connection-String>" 
 				Microsoft.EntityFrameworkCore.SqlServer -o Models -t <TableName1> <tablename2>..		
+
+Creating Models using EF Core Database First Approach
+
+-- If using Windows Auth.
+dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=Company;Integrated Security=SSPI;MultipleActiveResultSets=true" Microsoft.EntiryFrameworkCore.SqlServer -o Models  
+
+-- If using SQL Auth.
+dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=Company;User Id=sa;Password=<PWD>;MultipleActiveResultSets=true" Microsoft.EntiryFrameworkCore.SqlServer -o Models  
+
+
+
+
 
 		- The above command will generate DbContext class with CLR objects aka entity classes mapped
 		with tables used in command using <TableName>
