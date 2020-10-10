@@ -263,6 +263,23 @@ dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=Company;User Id=sa;P
 		- Model Validations
 		- Exception Management
 		- Filers
+	- Adding Views
+		- ViewResult(), the Razor Page, bound to the model and will display data from model or accept data
+			for model
+		- PartialViewResult(), the Razor reusable page bound to the model and will display data from model or accept data
+			for model
+		- ASP.NET Core uses 'TagHelper(?)' top bind the Model classes with Views 
+			- They are the Custom Attributes to HTML elements having server-side executions 
+			- asp-for
+				- used to bind model property with HTML element
+			- asp-action
+				- used to execute the Action from from control in PostBack or Routing
+			- asp-controller
+				- used to load the controller in postback or routing
+			- asp-items
+				-  Used to generate HTML elements based on Collection
+			- asp-validation-for
+			- asp-route
 	- Sessions
 	- Security
 	- Create APIs

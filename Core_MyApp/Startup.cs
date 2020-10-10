@@ -12,6 +12,8 @@ using Core_MyApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Core_MyApp.Models;
+using Core_MyApp.Repositories;
 
 namespace Core_MyApp
 {
@@ -50,6 +52,19 @@ namespace Core_MyApp
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            // register the COmpanyContext class in Dependency
+            // read the connection string from appSettings from "ConnectionStrings" section
+            // the AddDbContext() method will instantiate the DbContext class for a Scope (Stateful) 
+            services.AddDbContext<CompanyContext>(options=> {
+                options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString"));
+            });
+
+            //Register all Repository classes
+            services.AddScoped<IRepository<Department, int>, DepartmentRepository>();
+            
+            
+            
             // the method for request processing of MVC and API Controllers
             services.AddControllersWithViews();
             // the method for request procesing of WebForms Rezor pages
