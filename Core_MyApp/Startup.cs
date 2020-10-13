@@ -62,9 +62,10 @@ namespace Core_MyApp
 
             //Register all Repository classes
             services.AddScoped<IRepository<Department, int>, DepartmentRepository>();
-            
-            
-            
+            services.AddScoped<IRepository<Employee, int>, EmployeeRepository>();
+
+
+
             // the method for request processing of MVC and API Controllers
             services.AddControllersWithViews();
             // the method for request procesing of WebForms Rezor pages
@@ -96,6 +97,8 @@ namespace Core_MyApp
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            // Middleware used to read all  static files from server from the 'wwwroot' folder
+            // and will include these files in the HttpResponse of teh View
             app.UseStaticFiles();
 
             app.UseRouting();

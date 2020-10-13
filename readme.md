@@ -280,6 +280,27 @@ dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=Company;User Id=sa;P
 				-  Used to generate HTML elements based on Collection
 			- asp-validation-for
 			- asp-route
+		- A View can accept 'Only-One-Model' object for scaffolding
+			- to pass additional data from different model to the view, use the ViewDataDictionary
+				- ViewBag / ViewData
+					- They are the 'Action-Scoped' object used to carry data  from an action to view and
+						View to action.
+					- An Action-Scoped means the ViewData / ViewBag will be killed when the action execution
+						is completed
+					- If a view is using ViewData / ViewBag object, then all action methods returning to
+						the same view must pass ViewBag / ViewData to the view.
+				- If ViewBag / ViewData is used in PostBack operation from View, then the 'key' of 
+					ViweBag / ViewData must match with the Model class property that is used foe postback
+						e.g. If EMployee model is posted back with DeptNo property then the VeiwNag /ViewData
+							will be
+									- ViewBag.DeptNo / ViewData["DeptNo"]
+		- The View is rendered using jQuery Validation Library
+			- Unobstrisive JQuery Library 
+		- All HTML Tag helpers will be executed on server using the namrespace
+			@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+		
 	- Sessions
 	- Security
 	- Create APIs
