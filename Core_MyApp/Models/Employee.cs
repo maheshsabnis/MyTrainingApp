@@ -13,9 +13,9 @@ namespace Core_MyApp.Models
         [Required(ErrorMessage = "Designation is required")]
         public string Designation { get; set; }
         [Required(ErrorMessage = "Salary is required")]
-        [NumericPositiveValidation(ErrorMessage = "Salary Cannot be -ve")]
+        // [NumericPositiveValidation(ErrorMessage = "Salary Cannot be -ve")]
         public int Salary { get; set; }
-        [Required(ErrorMessage = "DeptNo is required")]
+      //  [Required(ErrorMessage = "DeptNo is required")]
         public int DeptNo { get; set; }
 
         public virtual Department DeptNoNavigation { get; set; }

@@ -23,3 +23,14 @@
     For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
     and restarting the app.
 </p>
+<hr/>
+<p>
+    <strong>
+        The Error Occured in Controller of Name @Model.ControllerName
+        The Error is in Action Mathod @Model.ActionName
+        The Error Message is <br/>
+        @Model.ErrorMessage
+    </strong>
+</p>
+<br/>
+<a asp-action="@Model.ActionName" asp-controller="@Model.ControllerName">Go Back</a>

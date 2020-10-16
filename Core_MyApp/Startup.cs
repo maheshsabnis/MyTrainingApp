@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Core_MyApp.Models;
 using Core_MyApp.Repositories;
+using Core_MyApp.CustomFilters;
 
 namespace Core_MyApp
 {
@@ -67,7 +68,10 @@ namespace Core_MyApp
 
 
             // the method for request processing of MVC and API Controllers
-            services.AddControllersWithViews();
+            // define the Action Filters at Global Level
+            services.AddControllersWithViews(options => {
+                options.Filters.Add(new MyLoggingFilter());
+            });
             // the method for request procesing of WebForms Rezor pages
             services.AddRazorPages();
         }

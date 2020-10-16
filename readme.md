@@ -263,6 +263,43 @@ dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=Company;User Id=sa;P
 		- Model Validations
 		- Exception Management
 		- Filers
+		- RouteData Property of the ControllerBase class represents trhe Route Expression 
+			- Property 'Values', to read the Route Expression
+				- Values["controller"]
+				- Values["action"]
+	- Implementing 	Action Filters
+		- ASP.NET Core executes Action Filters by Order
+			- The Interface IActionFilter and Abstract Base Class ActionFilterAttribute
+				- OnActionExecuting, In IActionFilter and ActionFilterAttribute
+				- OnActionExecuted , In IActionFilter and ActionFilterAttribute
+				- OnResultExecuting, In IActionFilter
+				- OnResultExecuted In IActionFilter
+			- Filter can be applied in
+				- Global Scope
+				- Controller Level
+				- Method Level
+			- Order of Execution
+				- Global
+					- OnActionExecuting
+				- Controller
+					- OnActionExecuting
+				- Action
+					- OnActionExecuting
+				------ Action Execution --------	
+				- Action
+					- OnActionExecuted
+				- Controller
+					- OnActionExecuted
+				- Global
+					- OnActionExecuted
+		- Implement Action Filters if you want to handle logic only limited for MVC / API COntroller
+			request execution
+		- To apply Action FIlter at global level use
+			- services.AddControllersWithView(options=> {
+			  options.Filters.Add(type of the Custom Action Filter)
+			})
+		- To Apply the Action Filter at Controller and Action Level apply it using attributes
+			[<Name-Of-Filter-Class>]
 	- Adding Views
 		- ViewResult(), the Razor Page, bound to the model and will display data from model or accept data
 			for model

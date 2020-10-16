@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using Core_MyApp.CustomFilters;
 using Core_MyApp.Models;
 using Core_MyApp.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core_MyApp.Controllers
 {
+    /// <summary>
+    /// Action Filter applied at controller level
+    /// </summary>
+    // [MyLoggingFilter]
     public class EmployeeController : Controller
     {
         IRepository<Employee, int> _empRepository;
@@ -43,15 +48,31 @@ namespace Core_MyApp.Controllers
          
         public async Task<ActionResult> Create(Employee emp)
         {
-            if (ModelState.IsValid)
-            {
-                emp = await _empRepository.CreateAsync(emp);
-                return RedirectToAction("Index");
-            }
-            ViewData["DeptNo"] = await _deptRepository.GetAsync();
-            return View(emp);
+            //try
+            //{
+                if (ModelState.IsValid)
+                {
+                    if (emp.Salary < 0)
+                    {
+                        throw new Exception($"Salary Cannot be -ve {emp.Salary}");
+                    }
+                    emp = await _empRepository.CreateAsync(emp);
+                    return RedirectToAction("Index");
+                }
+                ViewData["DeptNo"] = await _deptRepository.GetAsync();
+                return View(emp);
+            //}
+            //catch (Exception ex)
+            //{
+            //    return View("Error", new ErrorViewModel() {
+            //        ControllerName = this.RouteData.Values["controller"].ToString(),
+            //        ActionName = this.RouteData.Values["action"].ToString(),
+            //        ErrorMessage = ex.Message
+            //    });
+              
+            //}
         }
-
+       
         // GET: EmployeeController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
