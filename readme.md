@@ -292,6 +292,13 @@ dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=Company;User Id=sa;P
 					- OnActionExecuted
 				- Global
 					- OnActionExecuted
+		- Action Filter for enhancing Custion Exception Management in ASP.NET Core MVC Apps
+			- IExceptionFIlter intreface
+				- OnException() Method
+					- Accepts 'ExceptionContext' object as parameter
+						- USed for Handing Exception
+						- Defining the Result as a resonse when the Exception occures
+						- Exception object to Read/log exception
 		- Implement Action Filters if you want to handle logic only limited for MVC / API COntroller
 			request execution
 		- To apply Action FIlter at global level use
@@ -346,3 +353,14 @@ dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=Company;User Id=sa;P
 		- Model Binders
 	- Middlewares
 - Deployment
+
+
+
+Exercise : CReate a Exception Log FIlter , that will be used to log all requests with 
+			Error Messages in Databae Table. The Table will have folliwng Structure
+				- RequestId:Randomly Generated Code
+				- Controller
+				- Action
+				- Exception
+				- Date
+				- Time

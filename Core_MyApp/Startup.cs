@@ -71,6 +71,9 @@ namespace Core_MyApp
             // define the Action Filters at Global Level
             services.AddControllersWithViews(options => {
                 options.Filters.Add(new MyLoggingFilter());
+                // resister the custom exception filter
+                // the 
+                options.Filters.Add(typeof(MyExceptionFilterAttribute));
             });
             // the method for request procesing of WebForms Rezor pages
             services.AddRazorPages();

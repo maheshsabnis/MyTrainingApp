@@ -1,0 +1,15 @@
+﻿ 
+<h1 class="text-danger">Custom Exception View</h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+ 
+<hr/>
+<p>
+    <strong>
+        The Error Occured in Controller of Name @ViewData["ControllerName"] <br/>
+        The Error is in Action Mathod @ViewData["ActionName"] <br/>
+        The Error Message is <br/>
+        @ViewData["ErrorMessage"]
+    </strong>
+</p>
+<br/>
+<a asp-action="@ViewData["ActionName"]" asp-controller="@ViewData["ControllerName"]">Go Back</a>
