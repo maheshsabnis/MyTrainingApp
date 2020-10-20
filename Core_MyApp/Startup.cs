@@ -61,6 +61,14 @@ namespace Core_MyApp
                 options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString"));
             });
 
+            services.AddDistributedMemoryCache();
+
+            // configure the session state
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+            });
+
+
             //Register all Repository classes
             services.AddScoped<IRepository<Department, int>, DepartmentRepository>();
             services.AddScoped<IRepository<Employee, int>, EmployeeRepository>();
@@ -107,6 +115,8 @@ namespace Core_MyApp
             // Middleware used to read all  static files from server from the 'wwwroot' folder
             // and will include these files in the HttpResponse of teh View
             app.UseStaticFiles();
+            // inform the HttpContext to use sesion state
+            app.UseSession();
 
             app.UseRouting();
 

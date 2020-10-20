@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Core_MyApp.CustomFilters;
 using Core_MyApp.Models;
 using Core_MyApp.Repositories;
+using Core_MyApp.SessionExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,9 +27,24 @@ namespace Core_MyApp.Controllers
             _deptRepository = deptRepository;
         }
         // GET: EmployeeController
-        public async Task<ActionResult> Index()
+        public  IActionResult Index()
         {
-            var emps = await _empRepository.GetAsync();
+            List<Employee> emps = new List<Employee>();
+            // var id = HttpContext.Session.GetInt32("DeptNo");
+            // read department object from session
+            var dept = HttpContext.Session.GetSessionObject<Department>("Dept");
+            if (dept.DeptNo > 0)
+            {
+                emps = (from e in _empRepository.GetAsync().Result.ToList()
+                        where e.DeptNo == dept.DeptNo
+                        select e
+                        ).ToList();
+            }
+            else
+            { 
+                 emps =   _empRepository.GetAsync().Result.ToList();
+            }
+             
             return View(emps);
         }
 

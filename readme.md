@@ -346,6 +346,13 @@ dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=Company;User Id=sa;P
 
 		
 	- Sessions
+		- ISession interface. The contract beteween the ASP.NET Host Process and the Session Store
+			- The Sesion store is InMemoryDestributedCache.
+			- AddSession(), the method that will be used to store the sessions on server side
+			- AddInMemoryCache(), to store the session information aka session objects
+			- UseSession(), the middleware used to provides session support to all requests
+		- If you want to store the CLR object in Session, then define a SessionExtension class for 
+			ISeesion interface and implement methods to store session data in it in JSON Serialize format
 	- Security
 	- Create APIs
 		- Security

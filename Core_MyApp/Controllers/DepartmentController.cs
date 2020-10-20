@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core_MyApp.Models;
 using Core_MyApp.Repositories;
+using Core_MyApp.SessionExtensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core_MyApp.Controllers
@@ -59,6 +61,15 @@ namespace Core_MyApp.Controllers
         {
             var res = await _repositoryDept.DeleteAsync(id);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult ShowDetails(int id)
+        {
+            // HttpContext.Session.SetInt32("DeptNo", id);
+            // read the Department object based on id
+            var dept = _repositoryDept.GetAsync(id).Result;
+            HttpContext.Session.SetSesionObject<Department>("Dept", dept);
+            return RedirectToAction("Index", "Employee");
         }
     }
 }
