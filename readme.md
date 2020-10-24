@@ -356,8 +356,32 @@ dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=Company;User Id=sa;P
 	- Security
 	- Create APIs
 		- Security
+		- All premptive types are passed in Http Request Header
+			- e.g. int, string, double, boolean.
 		- HTTP Methods
+			- HttGet()/HttpGet("<Template>")
+			- HttPost()/HttpPost("<Template>")
+			- HttPut()/HttpPut("<Template>")
+			- HttDelete()/HttpDelete("<Template>")
 		- Model Binders
+			- Used to map the posted data from HTTP Post / Put request to CLR Object
+				- FromBody
+				- FromRoute
+				- FromQuery
+				- FromForm
+				- FromHeader
+		- ControllerBase
+			- Base class for API Controller. Contains methods for HTTP Responses	
+				- Ok() / OkResult() ---> Http Status code as 200/201 and JSON Objeect Serialization 
+					using OkResult()
+				- NotFound(), NoContent(), BadRequest()		
+		- ApiControllerAttribute class
+			- Used to Map the Data from Http Request body to CLR object for Post and Put requests
+				- Read data from Body and Deserialize it to CLR  object
+					- Implicit execution of FromBody	
+		- 
+
+
 	- Middlewares
 - Deployment
 

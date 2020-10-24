@@ -82,6 +82,12 @@ namespace Core_MyApp
                 // resister the custom exception filter
                 // the 
                 options.Filters.Add(typeof(MyExceptionFilterAttribute));
+            }).AddJsonOptions(options=> {
+                // please do not serialize the CLR properties in CamelCase instead
+                // serialize the CLR properties with their original names
+                // e.g. DeptNo should not be serialized as deptNo instaed it shpould
+                // be serialized as DeptNo 
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
             // the method for request procesing of WebForms Rezor pages
             services.AddRazorPages();
